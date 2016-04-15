@@ -21,18 +21,27 @@ public class Bullet : NetworkBehaviour {
 
 	}
 
-	void OnCollisionEnter (Collision col)
+	void OnTriggerEnter(Collider other)
 	{
-		if(!hasAuthority)
-		{
-			return;
-		}
+//		if(!hasAuthority)
+//		{
+//			
+//			return;
+//		}
 
 
-		var player = col.gameObject.GetComponent<PlayerMove>();
-		if(player != instigator)
+		//Debug.LogFormat("BulletHit");
+
+		var combat = other.gameObject.GetComponent<Combat>();
+
+		if(combat != null && other.gameObject != instigator)
 		{
-			player.RpcHitByBullet(5);
+			
+			combat.TakeDamage(5);
+			Destroy(gameObject);
 		}
+
 	}
+
+
 }

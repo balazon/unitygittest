@@ -3,13 +3,21 @@ using UnityEngine.Networking;
 
 public class PlayerMove : NetworkBehaviour
 {
-	
-
-	int health;
+//	public int maxHealth = 10;
+//
+//	int health;
 
 	public GameObject bulletPrefab;
 
 	Camera cam;
+
+	void Start()
+	{
+		//Respawn();
+
+
+
+	}
 
 	void Update()
 	{
@@ -26,7 +34,7 @@ public class PlayerMove : NetworkBehaviour
 
 
 		var fwd = Input.mousePosition - cam.WorldToScreenPoint(transform.position);
-		Debug.LogFormat("mouse: {0}, tr: {1}, fwd: {2}", Input.mousePosition, cam.WorldToScreenPoint(transform.position), fwd);
+		//Debug.LogFormat("mouse: {0}, tr: {1}, fwd: {2}", Input.mousePosition, cam.WorldToScreenPoint(transform.position), fwd);
 		fwd.z = fwd.y;
 		fwd.y = 0;
 		if(fwd.magnitude > 0.01)
@@ -37,18 +45,23 @@ public class PlayerMove : NetworkBehaviour
 
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			Fire();
+			CmdFire();
 		}
 	}
+		
 
 	public override void OnStartLocalPlayer()
 	{
-		health = 20;
+		
+		//transform.position = new Vector3(0, 0.5f, 0);
 		GetComponent<MeshRenderer>().material.color = Color.red;
 		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
-	void Fire()
+
+
+	[Command]
+	void CmdFire()
 	{
 		var go = Instantiate(bulletPrefab, transform.position + transform.forward * 0.7f, Quaternion.identity) as GameObject;
 		go.GetComponent<Rigidbody>().velocity = transform.forward * 4.0f;
@@ -59,21 +72,22 @@ public class PlayerMove : NetworkBehaviour
 		Destroy(go, 2.0f);
 	}
 
-	[ClientRpc]
-	public void RpcHitByBullet(int dmg)
-	{
-		if(health > 0)
-		{
-			health -= dmg;
-			if(health <= 0)
-			{
-				//respawn
-				health = 20;
-				transform.position = Vector3.zero;
-
-			}
-		}
-	}
+//	[ClientRpc]
+//	public void RpcHitByBullet(int dmg)
+//	{
+//		Debug.LogFormat("Player HitByBullet");
+//		if(health > 0)
+//		{
+//			health -= dmg;
+//			if(health <= 0)
+//			{
+//				//respawn
+//				health = maxHealth;
+//				transform.position = new Vector3(0, 0.5f, 0);
+//
+//			}
+//		}
+//	}
 
 
 }
