@@ -65,7 +65,7 @@ public class PlayerMove : NetworkBehaviour
 	{
 		var go = Instantiate(bulletPrefab, transform.position + transform.forward * 0.7f, Quaternion.identity) as GameObject;
 		go.GetComponent<Rigidbody>().velocity = transform.forward * 4.0f;
-		go.GetComponent<Bullet>().instigator = this;
+		go.GetComponent<Bullet>().instigator = gameObject;
 
 		NetworkServer.Spawn(go);
 

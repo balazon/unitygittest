@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class Bullet : NetworkBehaviour {
 
-	public PlayerMove instigator;
+	public GameObject instigator;
 
 	// Use this for initialization
 	void Start () {

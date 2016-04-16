@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554e8e6373dd44a4fa4a9c04392e3da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combat: {fileID: 0}
 --- !u!114 &11457262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,9 +98,9 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.614
+  m_FillAmount: 0.735
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
 --- !u!222 &22221298
 CanvasRenderer:
   m_ObjectHideFlags: 1
