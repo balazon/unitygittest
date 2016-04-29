@@ -56,6 +56,7 @@ public class PlayerMove : NetworkBehaviour
 		//transform.position = new Vector3(0, 0.5f, 0);
 		GetComponent<MeshRenderer>().material.color = Color.red;
 		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
 	}
 
 
